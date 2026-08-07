@@ -7,6 +7,7 @@
 ![React Native](https://img.shields.io/badge/Frontend-React_Native_%2B_Expo-61DAFB?style=flat-square&logo=react)
 ![Node](https://img.shields.io/badge/Backend-Node.js_%2B_Express-339933?style=flat-square&logo=node.js)
 ![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL_%2B_pgvector-336791?style=flat-square&logo=postgresql)
+![Sequelize](https://img.shields.io/badge/ORM-Sequelize-52B0E7?style=flat-square&logo=sequelize)
 ![OpenAI](https://img.shields.io/badge/AI-GPT--4o--mini-412991?style=flat-square&logo=openai)
 ![Docker](https://img.shields.io/badge/Deploy-Docker_%2B_Railway%2FRender-2496ED?style=flat-square&logo=docker)
 ![Status](https://img.shields.io/badge/Status-Draft_for_Review-yellow?style=flat-square)
@@ -26,7 +27,7 @@ The assistant can explain programming concepts, answer questions using the user'
 | 👤 **Prepared by** | Ayoub Khaya |
 | 💼 **Role** | Full-Stack Software Engineer (Project Author) |
 | 📄 **Document Type** | Final Project — Full-Stack Mobile Application |
-| 🧠 **Domain** | Artificial Intelligence · Mobile Development · Movies & TV Shows Tracker |
+| 🧠 **Domain** | Artificial Intelligence · Mobile Development · Developer Learning |
 | 🔖 **Version** | 1.0 |
 | 🚦 **Status** | Draft for Review |
 | 📅 **Date** | August 2026 |
@@ -40,6 +41,7 @@ The assistant can explain programming concepts, answer questions using the user'
 - [Features](#features)
 - [AI Agent Scope](#ai-agent-scope)
 - [System Architecture](#system-architecture)
+- [File Architecture](#file-architecture)
 - [Technology Stack](#technology-stack)
 - [Project Requirements](#project-requirements)
 - [Data Model](#data-model)
@@ -106,7 +108,7 @@ The objective is not to generate an application from a single prompt. The object
 
 ## AI Agent Scope
 
-The agent's role is clearly limited to supporting programming education and managing approved learning workflows.
+The agent's role is limited to supporting programming education and managing approved learning workflows.
 
 ### Authorized actions
 
@@ -125,11 +127,11 @@ The agent may:
 The agent can use:
 
 - The current conversation.
-- The user's authenticated personal knowledge base.
-- The application's approved documentation or documentary database.
+- The authenticated user's personal knowledge base.
+- Approved application documentation or a documentary database.
 - Explicitly connected external services and MCP tools.
 
-The agent must not present unverified generated content as a guaranteed fact. When the answer is based on retrieved content, the relevant source or document should be identified where possible.
+The agent must not present unverified generated content as guaranteed fact. When the answer is based on retrieved content, the relevant source should be identified where possible.
 
 ### Refused requests
 
@@ -165,28 +167,28 @@ AI responses can be incomplete, outdated, or incorrect. The application should c
 The planned architecture is divided into the following layers:
 
 ```text
-┌──────────────────────────────┐
+┌───────────────────────────────┐
 │ React Native / Expo Mobile App│
 │ Expo Router · Zustand · Axios │
-└──────────────┬───────────────┘
-               │ HTTPS / SSE
-┌──────────────▼───────────────┐
-│ Node.js / Express API         │
-│ Auth · CRUD · Agent endpoints │
-│ Validation · Security · Logs  │
-└───────┬───────────┬──────────┘
-        │           │
-┌───────▼──────┐ ┌──▼────────────────┐
-│ PostgreSQL   │ │ AI Orchestration   │
-│ Prisma ORM   │ │ LLM · RAG · Tools  │
-│ pgvector     │ │ Streaming · MCP   │
-└──────────────┘ └─────────┬──────────┘
-                           │
-                    ┌──────▼──────┐
-                    │ MCP servers │
-                    │ n8n workflows│
-                    │ External APIs│
-                    └─────────────┘
+└───────────────┬───────────────┘
+                │ HTTPS / SSE
+┌───────────────▼───────────────┐
+│ Node.js / Express API          │
+│ Auth · CRUD · Agent endpoints  │
+│ Validation · Security · Logs   │
+└────────┬──────────────┬───────┘
+         │              │
+┌────────▼────────┐ ┌───▼────────────────┐
+│ PostgreSQL       │ │ AI Orchestration   │
+│ Sequelize ORM    │ │ LLM · RAG · Tools  │
+│ pgvector         │ │ Streaming · MCP    │
+└──────────────────┘ └──────────┬─────────┘
+                                │
+                         ┌──────▼──────┐
+                         │ MCP servers │
+                         │ n8n workflows│
+                         │ External APIs│
+                         └─────────────┘
 ```
 
 ### Core backend flow
@@ -201,6 +203,156 @@ The planned architecture is divided into the following layers:
 
 ---
 
+## File Architecture
+
+The repository is organized into separate mobile, backend, database, AI, integration, testing, and documentation layers.
+
+```text
+devbuddy-ai/
+├── README.md
+├── LICENSE
+├── .gitignore
+├── docker-compose.yml
+├── docs/
+│   ├── architecture/
+│   │   ├── system-architecture.md
+│   │   ├── use-case-diagram.md
+│   │   ├── class-diagram.md
+│   │   └── sequence-diagrams.md
+│   ├── database/
+│   │   ├── schema.md
+│   │   └── entity-relationship-diagram.md
+│   ├── ai/
+│   │   ├── agent-scope.md
+│   │   ├── system-prompt.md
+│   │   ├── rag-pipeline.md
+│   │   ├── tools.md
+│   │   └── mcp.md
+│   ├── api/
+│   │   ├── openapi.yaml
+│   │   └── postman-collection.json
+│   ├── deployment.md
+│   └── vibe-coding-journal.md
+├── backend/
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── src/
+│   │   ├── app.ts
+│   │   ├── server.ts
+│   │   ├── config/
+│   │   │   ├── env.ts
+│   │   │   └── database.ts
+│   │   ├── routes/
+│   │   ├── controllers/
+│   │   ├── services/
+│   │   ├── repositories/
+│   │   ├── middlewares/
+│   │   ├── validators/
+│   │   ├── models/
+│   │   │   ├── index.ts
+│   │   │   ├── user.model.ts
+│   │   │   ├── deck.model.ts
+│   │   │   ├── flashcard.model.ts
+│   │   │   ├── note.model.ts
+│   │   │   ├── conversation.model.ts
+│   │   │   ├── message.model.ts
+│   │   │   ├── embedding.model.ts
+│   │   │   ├── review.model.ts
+│   │   │   └── audit-log.model.ts
+│   │   ├── migrations/
+│   │   ├── seeders/
+│   │   ├── modules/
+│   │   │   ├── auth/
+│   │   │   ├── decks/
+│   │   │   ├── flashcards/
+│   │   │   ├── notes/
+│   │   │   ├── reviews/
+│   │   │   └── conversations/
+│   │   ├── ai/
+│   │   │   ├── agent.service.ts
+│   │   │   ├── rag.service.ts
+│   │   │   ├── embedding.service.ts
+│   │   │   ├── prompt.service.ts
+│   │   │   ├── tool.service.ts
+│   │   │   └── streaming.service.ts
+│   │   ├── integrations/
+│   │   │   ├── llm/
+│   │   │   ├── mcp/
+│   │   │   └── n8n/
+│   │   ├── utils/
+│   │   └── types/
+│   └── tests/
+│       ├── unit/
+│       └── integration/
+├── mobile/
+│   ├── package.json
+│   ├── app/
+│   │   ├── _layout.tsx
+│   │   ├── index.tsx
+│   │   ├── (auth)/
+│   │   │   ├── login.tsx
+│   │   │   └── register.tsx
+│   │   └── (protected)/
+│   │       ├── _layout.tsx
+│   │       ├── index.tsx
+│   │       ├── decks/
+│   │       ├── flashcards/
+│   │       ├── quizzes/
+│   │       ├── chat/
+│   │       └── settings.tsx
+│   ├── src/
+│   │   ├── components/
+│   │   ├── features/
+│   │   │   ├── auth/
+│   │   │   ├── decks/
+│   │   │   ├── flashcards/
+│   │   │   ├── quizzes/
+│   │   │   └── chat/
+│   │   ├── stores/
+│   │   │   ├── auth.store.ts
+│   │   │   ├── data.store.ts
+│   │   │   ├── ui.store.ts
+│   │   │   ├── cache.store.ts
+│   │   │   └── conversation.store.ts
+│   │   ├── services/
+│   │   │   ├── api.ts
+│   │   │   ├── auth.ts
+│   │   │   └── sse.ts
+│   │   ├── hooks/
+│   │   ├── types/
+│   │   ├── constants/
+│   │   └── utils/
+│   └── tests/
+│       ├── components/
+│       └── screens/
+└── .github/
+    └── workflows/
+        └── ci.yml
+```
+
+### Directory responsibilities
+
+| Directory | Responsibility |
+|---|---|
+| `backend/src/config/database.ts` | Initializes and configures the Sequelize connection. |
+| `backend/src/models` | Defines Sequelize models and their relationships. |
+| `backend/src/migrations` | Stores versioned Sequelize database migrations. |
+| `backend/src/seeders` | Contains development and test seed data. |
+| `backend/src/routes` | Defines versioned HTTP routes. |
+| `backend/src/controllers` | Handles HTTP requests and returns standardized responses. |
+| `backend/src/services` | Contains application and business logic. |
+| `backend/src/repositories` | Encapsulates database queries and persistence logic. |
+| `backend/src/ai` | Implements the agent, prompts, RAG, embeddings, tools, and streaming. |
+| `backend/src/integrations` | Connects the application to the LLM, MCP, and n8n. |
+| `backend/src/middlewares` | Handles authentication, authorization, validation, rate limiting, and errors. |
+| `mobile/app` | Defines Expo Router screens and protected route groups. |
+| `mobile/src/features` | Groups mobile UI and logic by product feature. |
+| `mobile/src/stores` | Contains modular Zustand stores and persisted client state. |
+| `mobile/src/services` | Centralizes Axios, authentication, token refresh, and SSE. |
+| `docs` | Stores architecture, database, AI, API, deployment, and development documentation. |
+
+---
+
 ## Technology Stack
 
 | Area | Planned technologies |
@@ -209,9 +361,9 @@ The planned architecture is divided into the following layers:
 | State management | Zustand, AsyncStorage persistence, selectors |
 | HTTP and streaming | Axios, interceptors, token refresh, SSE |
 | Backend | Node.js, Express, MVC or Clean Architecture |
-| Database | PostgreSQL, Prisma/Sequelize/TypeORM, pgvector |
+| Database | PostgreSQL, Sequelize ORM, pgvector |
 | Authentication | JWT access and refresh tokens, bcrypt, SecureStore |
-| AI | OpenAI or Claude API; Ollama may be used locally |
+| AI | OpenAI GPT-4o-mini; Ollama may be used locally |
 | RAG | Chunking, embeddings, pgvector similarity search |
 | Agent tools | Function calling and MCP |
 | Validation | Zod, Joi, or express-validator |
@@ -219,8 +371,6 @@ The planned architecture is divided into the following layers:
 | Automation | n8n (bonus) |
 | Deployment | Docker, Railway or Render |
 | Documentation | OpenAPI/Swagger and Postman |
-
-The final LLM provider and ORM will be selected and justified in the architecture documentation.
 
 ---
 
@@ -230,9 +380,9 @@ The final LLM provider and ORM will be selected and justified in the architectur
 
 - REST API with versioned routes and complete CRUD operations.
 - Standardized relational schema in third normal form.
-- Clear MVC or Clean Architecture boundaries.
-- Versioned database migrations and transactions.
-- Relationships covering one-to-one, one-to-many, and many-to-many use cases where relevant.
+- MVC or Clean Architecture boundaries.
+- Sequelize models, associations, migrations, seeders, and transactions.
+- One-to-one, one-to-many, and many-to-many relationships where relevant.
 - JWT registration, login, logout, refresh, and protected routes.
 - Password hashing with bcrypt.
 - Request validation and centralized error handling.
@@ -256,14 +406,14 @@ The final LLM provider and ORM will be selected and justified in the architectur
 
 ### AI, agent, and RAG
 
-- A documented choice of LLM provider.
-- A system prompt defining the agent's role, tone, permissions, and limits.
+- Documented choice of OpenAI GPT-4o-mini.
+- System prompt defining the agent's role, tone, permissions, and limits.
 - Document chunking and embedding generation.
 - Vector search against authorized user content.
 - Conversation history and short-term memory management.
 - Streaming responses to the frontend.
 - Moderation, rate limiting, and prompt-injection defenses.
-- Function calling when the agent needs to trigger an approved action.
+- Function calling for approved actions only.
 
 ### MCP bonus
 
@@ -273,19 +423,13 @@ The final LLM provider and ORM will be selected and justified in the architectur
 
 ### Automation bonus
 
-Document an AI workflow for a recurring task, such as:
-
-- Periodic learning summaries.
-- Flashcard classification.
-- Personalized review notifications.
-
-Each automation must document its trigger, processing steps, safeguards, and output.
+Document an AI workflow for a recurring task, such as periodic learning summaries, flashcard classification, or personalized review notifications. Document its trigger, processing steps, safeguards, and output.
 
 ---
 
 ## Data Model
 
-The relational model is expected to include entities similar to:
+The relational model includes the following entities:
 
 - `User`: account, credentials, preferences, and timestamps.
 - `Deck`: a user's learning collection.
@@ -297,7 +441,9 @@ The relational model is expected to include entities similar to:
 - `Review`: learning activity and progress information.
 - `AuditLog`: security and agent interaction events.
 
-Foreign keys, ownership checks, unique constraints, indexes, and cascade behavior must be explicitly defined in the database design. The UML use-case and class diagrams must include the AI entities, especially `Conversation`, `Message`, and `Embedding`.
+Sequelize associations, foreign keys, ownership checks, unique constraints, indexes, and cascade behavior must be explicitly defined. Database changes must use versioned Sequelize migrations, and seed data must be managed through Sequelize seeders.
+
+The UML use-case and class diagrams must include the AI entities, especially `Conversation`, `Message`, and `Embedding`.
 
 ---
 
@@ -309,8 +455,8 @@ Foreign keys, ownership checks, unique constraints, indexes, and cascade behavio
 - npm, pnpm, or yarn.
 - PostgreSQL with the `pgvector` extension enabled for RAG.
 - Expo CLI and a mobile emulator or Expo-compatible device.
-- An API key for the selected LLM provider, unless using a local model.
-- Docker and Docker Compose for the containerized environment.
+- An OpenAI API key, unless using a local model.
+- Docker and Docker Compose.
 
 ### Installation
 
@@ -326,9 +472,9 @@ npm install
 # Create local environment configuration
 cp .env.example .env
 
-# Run database migrations and seed data
-npm run db:migrate
-npm run db:seed
+# Run Sequelize migrations and seeders
+npx sequelize-cli db:migrate
+npx sequelize-cli db:seed:all
 
 # Start the backend
 npm run dev
@@ -348,7 +494,7 @@ npx expo start
 docker compose up --build
 ```
 
-The exact commands may change as the project structure evolves. Keep the setup instructions synchronized with the repository scripts.
+Keep these commands synchronized with the scripts defined in `package.json`.
 
 ---
 
@@ -360,10 +506,15 @@ Never commit `.env` files, private keys, JWT secrets, or provider credentials.
 NODE_ENV=development
 PORT=3000
 DATABASE_URL=postgresql://user:password@localhost:5432/devbuddy
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=devbuddy
+DB_USER=postgres
+DB_PASSWORD=postgres
 JWT_ACCESS_SECRET=replace-me
 JWT_REFRESH_SECRET=replace-me
-LLM_PROVIDER=openai
-LLM_API_KEY=replace-me
+OPENAI_API_KEY=replace-me
+LLM_MODEL=gpt-4o-mini
 VECTOR_PROVIDER=pgvector
 CORS_ORIGIN=http://localhost:8081
 ```
@@ -377,12 +528,13 @@ The backend must validate required environment variables at startup and fail saf
 - Use feature-based modules and keep business logic outside route handlers.
 - Validate all external input at the API boundary.
 - Enforce authorization at the resource level, not only at the route level.
-- Use parameterized ORM queries and avoid unsafe raw SQL.
+- Use Sequelize query methods and safe parameter replacements; avoid unsafe raw SQL.
+- Define Sequelize associations in one clear location.
 - Keep AI tools narrowly scoped, typed, and permission-aware.
 - Store only the minimum conversation and personal data required by the product.
-- Add migrations for every schema change.
+- Add a Sequelize migration for every schema change.
 - Log security-relevant events without logging passwords, tokens, or sensitive prompt content.
-- Use transactions for multi-step writes.
+- Use Sequelize transactions for multi-step writes.
 - Keep API responses and error formats consistent.
 
 ---
@@ -391,14 +543,7 @@ The backend must validate required environment variables at startup and fail saf
 
 AI may be used as a development assistant for architecture exploration, code generation, debugging, testing, documentation, and refactoring. The developer remains responsible for the architecture, security, code quality, integration, validation, and ability to explain every implemented solution.
 
-The project must maintain a prompt journal containing:
-
-- The date and objective of each prompt.
-- The relevant context provided to the AI assistant.
-- The generated result.
-- Corrections, rejected suggestions, and reasoning.
-- Tests used to validate the result.
-- The final implementation and lessons learned.
+The project must maintain a prompt journal containing the date and objective of each prompt, the context provided, the generated result, corrections, rejected suggestions, validation tests, and lessons learned.
 
 Prompts should be small and testable rather than monolithic. Every AI-generated change must be reviewed, adapted to project conventions, tested, and understood before integration.
 
@@ -409,8 +554,8 @@ Prompts should be small and testable rather than monolithic. Every AI-generated 
 The project should include:
 
 - Unit tests for services, utilities, validation, and agent policies.
-- Integration tests for authentication, CRUD routes, database operations, and authorization.
-- Agent tests for allowed actions, refusals, prompt injection attempts, and confirmation flows.
+- Integration tests for authentication, CRUD routes, Sequelize database operations, and authorization.
+- Agent tests for allowed actions, refusals, prompt-injection attempts, and confirmation flows.
 - RAG tests for document ingestion, retrieval relevance, and unauthorized-content isolation.
 - Mobile tests for navigation guards, token refresh, chat streaming, and error states.
 - API collection tests using Postman or an equivalent tool.
@@ -428,10 +573,10 @@ Deployment requirements:
 
 - Use optimized multi-stage Dockerfiles where appropriate.
 - Provide production environment variables through the hosting platform's secret manager.
-- Run database migrations as an explicit deployment step.
+- Run Sequelize migrations as an explicit deployment step.
 - Configure CORS, HTTPS, health checks, and database backups.
 - Restrict production logging to safe, useful information.
-- Never expose LLM keys or JWT secrets to the mobile application.
+- Never expose OpenAI keys or JWT secrets to the mobile application.
 - Document rollback and migration procedures.
 
 ---
@@ -442,7 +587,7 @@ The repository should contain:
 
 - Global architecture and UML diagrams.
 - Use-case and class diagrams including AI entities.
-- Database schema and migration documentation.
+- Sequelize database schema, associations, and migration documentation.
 - OpenAPI/Swagger documentation.
 - Postman collection for the REST API.
 - Agent system prompt and tool specifications.
@@ -457,11 +602,12 @@ The repository should contain:
 ## Roadmap
 
 - [ ] Initialize mobile and backend workspaces.
-- [ ] Design UML architecture and database schema.
+- [ ] Design UML architecture and the Sequelize database schema.
+- [ ] Configure Sequelize, PostgreSQL, migrations, seeders, and associations.
 - [ ] Implement authentication and protected navigation.
 - [ ] Implement deck, flashcard, note, and review CRUD operations.
-- [ ] Add migrations, indexes, validation, and centralized errors.
-- [ ] Integrate the selected LLM provider.
+- [ ] Add indexes, validation, transactions, and centralized errors.
+- [ ] Integrate OpenAI GPT-4o-mini.
 - [ ] Implement document chunking, embeddings, and pgvector retrieval.
 - [ ] Add streamed conversations and persistent history.
 - [ ] Add agent safeguards, audit logs, and confirmation flows.

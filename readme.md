@@ -1,26 +1,21 @@
 <div align="center">
 
 # 📚 DevBuddy AI
-
-## AI-Powered Developer Learning Assistant
+### AI-Powered Developer Learning Assistant
 
 ![React Native](https://img.shields.io/badge/Frontend-React_Native_%2B_Expo-61DAFB?style=flat-square&logo=react)
 ![Node](https://img.shields.io/badge/Backend-Node.js_%2B_Express-339933?style=flat-square&logo=node.js)
 ![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL_%2B_pgvector-336791?style=flat-square&logo=postgresql)
-![Sequelize](https://img.shields.io/badge/ORM-Sequelize-52B0E7?style=flat-square&logo=sequelize)
 ![OpenAI](https://img.shields.io/badge/AI-GPT--4o--mini-412991?style=flat-square&logo=openai)
 ![Docker](https://img.shields.io/badge/Deploy-Docker_%2B_Railway%2FRender-2496ED?style=flat-square&logo=docker)
 ![Status](https://img.shields.io/badge/Status-Draft_for_Review-yellow?style=flat-square)
-
 </div>
 
-DevBuddy AI is a mobile application that helps developers learn, organize, and review programming knowledge more efficiently. Users can create technical flashcards, organize them into learning decks, and interact with an AI-powered learning assistant.
+DevBuddy AI is a mobile application that helps developers learn, organize, and review programming knowledge more efficiently. Users create technical flashcards, organize them into learning decks, and interact with an AI-powered learning assistant.
 
-The assistant can explain programming concepts, answer questions using the user's personal knowledge base, generate quizzes, and transform notes into flashcards through Retrieval-Augmented Generation (RAG).
+The assistant explains programming concepts, answers questions using the user's own notes and flashcards, generates quizzes, and turns notes into flashcard drafts — all grounded in the user's personal knowledge base through Retrieval-Augmented Generation (RAG).
 
-> **Project type:** End-of-training project covering mobile development, backend development, database design, security, API integration, artificial intelligence, and deployment.
-
-<br>
+**Project type:** End-of-training project covering mobile development, backend development, database design, security, API integration, artificial intelligence, and deployment.
 
 | | |
 |---|---|
@@ -61,155 +56,123 @@ The assistant can explain programming concepts, answer questions using the user'
 
 DevBuddy AI combines active recall, structured knowledge management, and generative AI in one personalized learning companion for developers.
 
-The project demonstrates a complete implementation of the skills acquired during training:
+The project demonstrates a complete, realistically-scoped implementation of the skills acquired during training:
 
 - Mobile application development.
 - REST API and backend architecture.
 - Relational and vector database design.
 - Authentication and application security.
-- AI integration, RAG, streaming, and function calling.
-- External tool integration through MCP.
-- Automated workflows and cloud deployment.
+- AI integration: RAG, streaming, and function calling.
 
-The objective is not to generate an application from a single prompt. The objective is to build an iterative, documented, testable, and explainable software product.
+The objective is not to generate an application from a single prompt. The objective is to build an iterative, documented, testable, and explainable software product — kept deliberately simple enough to fully build, understand, and defend end-to-end.
 
 ---
 
 ## Features
 
 ### Learning and knowledge management
-
 - Create, update, delete, and review technical flashcards.
 - Organize flashcards into learning decks.
 - Search, filter, sort, and paginate personal knowledge.
-- Track learning progress and review history.
+- Track basic review history (last reviewed, review count).
 - Store notes and convert them into flashcards with AI assistance.
-- Generate quizzes based on a deck, topic, or personal notes.
+- Generate a quiz based on a deck or a note.
 
 ### AI learning assistant
-
 - Explain programming concepts at an appropriate level.
-- Answer questions using the user's personal knowledge base.
-- Retrieve relevant documents with RAG before generating an answer.
+- Answer questions using the user's own notes and flashcards.
+- Retrieve relevant personal content with RAG before generating an answer.
 - Stream responses progressively to the mobile interface.
 - Maintain short-term conversation memory and persistent history.
-- Recommend learning resources or the next review action.
-- Call approved business functions when an action is required.
+- Call approved business functions when an action is required (e.g. save a generated flashcard).
 
 ### User experience
-
 - Authentication-aware navigation.
 - Persistent conversations and learning data.
 - Loading, streaming, generation, and error states.
 - Secure token storage on the device.
-- Responsive mobile interface built for focused learning.
+- Simple, focused mobile interface built for learning, not busywork.
 
 ---
 
 ## AI Agent Scope
 
-The agent's role is limited to supporting programming education and managing approved learning workflows.
+The agent's role is limited to supporting programming education and managing a small set of approved learning actions.
 
 ### Authorized actions
-
 The agent may:
-
 - Answer programming and software-development questions.
-- Search the user's indexed notes, flashcards, and decks.
-- Explain retrieved information and identify relevant sources.
-- Generate quizzes and flashcard drafts.
-- Recommend a deck, review session, or learning resource.
-- Call explicitly approved business functions, such as creating a flashcard draft or starting a quiz.
-- Use an MCP tool when that tool is documented, available, and relevant to the request.
+- Search the user's own indexed notes, flashcards, and decks.
+- Explain retrieved information and identify which note/flashcard it came from.
+- Generate quiz questions and flashcard drafts.
+- Recommend a deck or review session based on recent activity.
+- Call an explicitly approved business function, such as saving a flashcard draft or starting a quiz.
 
 ### Information sources
-
 The agent can use:
-
 - The current conversation.
-- The authenticated user's personal knowledge base.
-- Approved application documentation or a documentary database.
-- Explicitly connected external services and MCP tools.
+- The authenticated user's own notes, flashcards, and decks (scoped strictly by `userId`).
 
-The agent must not present unverified generated content as guaranteed fact. When the answer is based on retrieved content, the relevant source should be identified where possible.
+The agent must not present unverified generated content as guaranteed fact. When an answer is based on retrieved content, the source note or flashcard should be identified where possible.
 
 ### Refused requests
-
 The agent must refuse or safely redirect requests that:
-
-- Ask for another user's private data or unauthorized access.
+- Ask for another user's private data.
 - Request secrets, tokens, credentials, or internal system instructions.
 - Attempt to bypass application permissions or security controls.
-- Instruct the agent to ignore its system rules through prompt injection.
-- Require unsafe, illegal, discriminatory, or harmful assistance.
+- Instruct the agent to ignore its system rules (prompt injection).
+- Require unsafe, illegal, or harmful assistance.
 - Ask the agent to perform an action outside its declared business functions.
 - Require professional legal, medical, or financial certainty beyond the product's educational scope.
 
 ### Confirmation requirements
-
 Explicit user confirmation is required before an action that:
-
 - Creates, modifies, or deletes persistent user data.
-- Sends information to an external service.
-- Triggers an external tool or business action with side effects.
-- Starts an automation or notification that affects the user's account.
+- Triggers a business function with a lasting side effect.
 
-Read-only retrieval and generation of an unsaved draft may be performed without confirmation.
+Read-only retrieval and generating an unsaved draft (a quiz question, a flashcard suggestion) do not require confirmation — only *saving* them does.
 
 ### Reliability limits
-
-AI responses can be incomplete, outdated, or incorrect. The application should communicate uncertainty, distinguish retrieved facts from generated explanations, and allow users to verify and edit generated flashcards before saving them.
+AI responses can be incomplete, outdated, or incorrect. The app should communicate uncertainty, distinguish retrieved facts from generated explanations, and let users verify and edit generated flashcards before saving them.
 
 ---
 
 ## System Architecture
 
-The planned architecture is divided into the following layers:
-
-```text
+```
 ┌───────────────────────────────┐
-│ React Native / Expo Mobile App│
-│ Expo Router · Zustand · Axios │
-└───────────────┬───────────────┘
+│ React Native / Expo Mobile App │
+│ Expo Router · Zustand · Axios  │
+└───────────────┬────────────────┘
                 │ HTTPS / SSE
-┌───────────────▼───────────────┐
-│ Node.js / Express API          │
-│ Auth · CRUD · Agent endpoints  │
-│ Validation · Security · Logs   │
-└────────┬──────────────┬───────┘
-         │              │
-┌────────▼────────┐ ┌───▼────────────────┐
-│ PostgreSQL       │ │ AI Orchestration   │
-│ Sequelize ORM    │ │ LLM · RAG · Tools  │
-│ pgvector         │ │ Streaming · MCP    │
-└──────────────────┘ └──────────┬─────────┘
-                                │
-                         ┌──────▼──────┐
-                         │ MCP servers │
-                         │ n8n workflows│
-                         │ External APIs│
-                         └─────────────┘
+┌───────────────▼────────────────┐
+│ Node.js / Express API            │
+│ Auth · CRUD · Agent endpoints    │
+│ Validation · Security · Logs     │
+└────────┬───────────────┬────────┘
+         │               │
+┌────────▼────────┐ ┌────▼────────────────┐
+│ PostgreSQL        │ │ AI Orchestration     │
+│ Sequelize ORM      │ │ LLM · RAG · Tools    │
+│ pgvector            │ │ Streaming             │
+└────────────────────┘ └───────────────────────┘
 ```
 
 ### Core backend flow
-
 1. The mobile client authenticates with the API.
 2. The user sends a question or task to the agent endpoint.
 3. The backend validates the request, applies rate limits, and records an audit event.
-4. The RAG pipeline searches authorized knowledge using embeddings and similarity search.
+4. The RAG pipeline searches the user's own notes/flashcards using embeddings and similarity search.
 5. The agent generates a response or proposes an approved function call.
 6. The response is streamed to the mobile client through SSE.
-7. Side-effecting actions require confirmation and are logged.
+7. Any action that writes data requires confirmation and is logged.
 
 ---
 
 ## File Architecture
 
-The repository is organized into separate mobile, backend, database, AI, integration, testing, and documentation layers.
-
-```text
+```
 devbuddy-ai/
-
 ├── README.md
 ├── docker-compose.yml
 ├── .env.example
@@ -222,104 +185,80 @@ devbuddy-ai/
 │   └── vibe-coding-journal.md
 │
 ├── backend/
-
 │   ├── package.json
 │   ├── Dockerfile
-│
 │   ├── migrations/
 │   ├── seeders/
-│
 │   └── src/
 │       ├── app.js
 │       ├── server.js
-│
 │       ├── config/
 │       │   ├── database.js
 │       │   └── env.js
-│
 │       ├── models/
 │       │   ├── index.js
 │       │   ├── User.js
 │       │   ├── Deck.js
 │       │   ├── Flashcard.js
+│       │   ├── Note.js
 │       │   ├── Conversation.js
 │       │   ├── Message.js
-│       │   └── Embedding.js
-│
+│       │   └── AuditLog.js
 │       ├── routes/
 │       │   ├── auth.routes.js
 │       │   ├── deck.routes.js
 │       │   ├── flashcard.routes.js
 │       │   └── agent.routes.js
-│
 │       ├── controllers/
 │       │   ├── auth.controller.js
 │       │   ├── deck.controller.js
 │       │   ├── flashcard.controller.js
 │       │   └── agent.controller.js
-│
 │       ├── services/
 │       │   ├── auth.service.js
 │       │   ├── deck.service.js
 │       │   └── agent.service.js
-│
 │       ├── middleware/
 │       │   ├── auth.js
 │       │   └── error.js
-│
 │       ├── ai/
 │       │   ├── openai.service.js
 │       │   ├── rag.service.js
 │       │   ├── embedding.service.js
 │       │   ├── prompt.service.js
 │       │   └── streaming.service.js
-│
 │       └── utils/
 │           ├── jwt.js
 │           └── password.js
 │
-├── mobile/
-
-│   ├── package.json
-│
-│   ├── app/
-│   │
-│   ├── (auth)/
-│   │   ├── login.jsx
-│   │   └── register.jsx
-│   │
-│   └── (protected)/
-│       ├── index.jsx
-│       ├── decks/
-│       ├── flashcards/
-│       └── chat/
-│
-│
-└── .github/
-    └── workflows/
-        └── ci.yml
+└── mobile/
+    ├── package.json
+    └── app/
+        ├── (auth)/
+        │   ├── login.jsx
+        │   └── register.jsx
+        └── (protected)/
+            ├── index.jsx
+            ├── decks/
+            ├── flashcards/
+            └── chat/
 ```
 
 ### Directory responsibilities
 
 | Directory | Responsibility |
 |---|---|
-| `backend/src/config/database.ts` | Initializes and configures the Sequelize connection. |
-| `backend/src/models` | Defines Sequelize models and their relationships. |
-| `backend/src/migrations` | Stores versioned Sequelize database migrations. |
-| `backend/src/seeders` | Contains development and test seed data. |
-| `backend/src/routes` | Defines versioned HTTP routes. |
+| `backend/src/config/database.js` | Initializes and configures the Sequelize connection. |
+| `backend/src/models` | Defines Sequelize models and their associations. |
+| `backend/migrations` | Stores versioned Sequelize database migrations. |
+| `backend/seeders` | Contains development seed data. |
+| `backend/src/routes` | Defines HTTP routes. |
 | `backend/src/controllers` | Handles HTTP requests and returns standardized responses. |
-| `backend/src/services` | Contains application and business logic. |
-| `backend/src/repositories` | Encapsulates database queries and persistence logic. |
-| `backend/src/ai` | Implements the agent, prompts, RAG, embeddings, tools, and streaming. |
-| `backend/src/integrations` | Connects the application to the LLM, MCP, and n8n. |
-| `backend/src/middlewares` | Handles authentication, authorization, validation, rate limiting, and errors. |
+| `backend/src/services` | Contains business logic and database queries (no separate repository layer needed at this scale). |
+| `backend/src/ai` | Implements the agent, prompts, RAG, embeddings, and streaming. |
+| `backend/src/middleware` | Handles authentication, validation, and error handling. |
 | `mobile/app` | Defines Expo Router screens and protected route groups. |
-| `mobile/src/features` | Groups mobile UI and logic by product feature. |
-| `mobile/src/stores` | Contains modular Zustand stores and persisted client state. |
-| `mobile/src/services` | Centralizes Axios, authentication, token refresh, and SSE. |
-| `docs` | Stores architecture, database, AI, API, deployment, and development documentation. |
+| `docs` | Stores architecture, database, AI, API, and development documentation. |
 
 ---
 
@@ -330,15 +269,14 @@ devbuddy-ai/
 | Mobile | React Native, Expo, Expo Router |
 | State management | Zustand, AsyncStorage persistence, selectors |
 | HTTP and streaming | Axios, interceptors, token refresh, SSE |
-| Backend | Node.js, Express, MVC or Clean Architecture |
+| Backend | Node.js, Express |
 | Database | PostgreSQL, Sequelize ORM, pgvector |
 | Authentication | JWT access and refresh tokens, bcrypt, SecureStore |
-| AI | OpenAI GPT-4o-mini; Ollama may be used locally |
+| AI | OpenAI GPT-4o-mini |
 | RAG | Chunking, embeddings, pgvector similarity search |
-| Agent tools | Function calling and MCP |
-| Validation | Zod, Joi, or express-validator |
-| Logging | Winston and Morgan, including agent audit logs |
-| Automation | n8n (bonus) |
+| Agent actions | Function calling (limited, with confirmation) |
+| Validation | express-validator |
+| Logging | Winston and Morgan, plus an AuditLog table for agent activity |
 | Deployment | Docker, Railway or Render |
 | Documentation | OpenAPI/Swagger and Postman |
 
@@ -347,10 +285,8 @@ devbuddy-ai/
 ## Project Requirements
 
 ### Backend
-
-- REST API with versioned routes and complete CRUD operations.
+- REST API with complete CRUD operations.
 - Standardized relational schema in third normal form.
-- MVC or Clean Architecture boundaries.
 - Sequelize models, associations, migrations, seeders, and transactions.
 - One-to-one, one-to-many, and many-to-many relationships where relevant.
 - JWT registration, login, logout, refresh, and protected routes.
@@ -362,7 +298,6 @@ devbuddy-ai/
 - Interaction audit logs for the AI agent.
 
 ### Mobile frontend
-
 - Conditional navigation for authenticated and unauthenticated users.
 - Modular Zustand stores for authentication, data, UI, cache, and conversations.
 - AsyncStorage persistence only for appropriate non-sensitive state.
@@ -372,28 +307,16 @@ devbuddy-ai/
 - Persistent conversation history.
 - Clear loading, generation, empty, and error states.
 - Private routes and automatic redirection.
-- Relevant use of Expo APIs, permissions, and Expo Updates where applicable.
 
 ### AI, agent, and RAG
-
 - Documented choice of OpenAI GPT-4o-mini.
 - System prompt defining the agent's role, tone, permissions, and limits.
 - Document chunking and embedding generation.
-- Vector search against authorized user content.
-- Conversation history and short-term memory management.
+- Vector search against the user's own content.
+- Short-term conversation memory.
 - Streaming responses to the frontend.
-- Moderation, rate limiting, and prompt-injection defenses.
-- Function calling for approved actions only.
-
-### MCP bonus
-
-- Connect the agent to at least one MCP server, or build a small MCP server exposing a business action.
-- Document the client/server architecture and available tools.
-- Prepare a reproducible MCP demonstration scenario for the project defense.
-
-### Automation bonus
-
-Document an AI workflow for a recurring task, such as periodic learning summaries, flashcard classification, or personalized review notifications. Document its trigger, processing steps, safeguards, and output.
+- Rate limiting and prompt-injection defenses.
+- Function calling for approved actions only, with confirmation before any write.
 
 ---
 
@@ -401,31 +324,30 @@ Document an AI workflow for a recurring task, such as periodic learning summarie
 
 The relational model includes the following entities:
 
-- `User`: account, credentials, preferences, and timestamps.
-- `Deck`: a user's learning collection.
-- `Flashcard`: question, answer, topic, difficulty, and review metadata.
-- `Note`: source material submitted by the user.
-- `Conversation`: an AI conversation owned by a user.
-- `Message`: user, assistant, tool, or system messages.
-- `Embedding`: vector representation of indexed content.
-- `Review`: learning activity and progress information.
-- `AuditLog`: security and agent interaction events.
+- **User** — account, credentials, and timestamps.
+- **Deck** — a user's learning collection.
+- **Flashcard** — question, answer, topic, difficulty, and simple review metadata.
+- **Note** — source material submitted by the user; holds a pgvector `embedding` column used for RAG.
+- **Conversation** — an AI conversation owned by a user.
+- **Message** — user, assistant, or tool messages within a conversation.
+- **AuditLog** — security and agent interaction events.
+
+Embeddings are stored as a `vector` column directly on `Note` (and on `Flashcard` if flashcards are also searchable) rather than in a separate table — simpler to reason about at this scale, and avoids a polymorphic foreign key.
 
 Sequelize associations, foreign keys, ownership checks, unique constraints, indexes, and cascade behavior must be explicitly defined. Database changes must use versioned Sequelize migrations, and seed data must be managed through Sequelize seeders.
 
-The UML use-case and class diagrams must include the AI entities, especially `Conversation`, `Message`, and `Embedding`.
+The UML use-case and class diagrams must include the AI entities, especially `Conversation`, `Message`, and the `embedding` column.
 
 ---
 
 ## Getting Started
 
 ### Prerequisites
-
 - Node.js 20 or later.
 - npm, pnpm, or yarn.
-- PostgreSQL with the `pgvector` extension enabled for RAG.
+- PostgreSQL with the pgvector extension enabled.
 - Expo CLI and a mobile emulator or Expo-compatible device.
-- An OpenAI API key, unless using a local model.
+- An OpenAI API key.
 - Docker and Docker Compose.
 
 ### Installation
@@ -472,7 +394,7 @@ Keep these commands synchronized with the scripts defined in `package.json`.
 
 Never commit `.env` files, private keys, JWT secrets, or provider credentials.
 
-```env
+```
 NODE_ENV=development
 PORT=3000
 DATABASE_URL=postgresql://user:password@localhost:5432/devbuddy
@@ -495,11 +417,11 @@ The backend must validate required environment variables at startup and fail saf
 
 ## Development Guidelines
 
-- Use feature-based modules and keep business logic outside route handlers.
+- Keep business logic in `services/`, out of route handlers.
 - Validate all external input at the API boundary.
 - Enforce authorization at the resource level, not only at the route level.
-- Use Sequelize query methods and safe parameter replacements; avoid unsafe raw SQL.
-- Define Sequelize associations in one clear location.
+- Use Sequelize query methods and safe parameter replacements; avoid raw SQL.
+- Define Sequelize associations in one clear location (`models/index.js`).
 - Keep AI tools narrowly scoped, typed, and permission-aware.
 - Store only the minimum conversation and personal data required by the product.
 - Add a Sequelize migration for every schema change.
@@ -513,7 +435,7 @@ The backend must validate required environment variables at startup and fail saf
 
 AI may be used as a development assistant for architecture exploration, code generation, debugging, testing, documentation, and refactoring. The developer remains responsible for the architecture, security, code quality, integration, validation, and ability to explain every implemented solution.
 
-The project must maintain a prompt journal containing the date and objective of each prompt, the context provided, the generated result, corrections, rejected suggestions, validation tests, and lessons learned.
+The project must maintain a prompt journal containing, for each meaningful prompt: the date and objective, the context provided, the generated result, any corrections made, and lessons learned.
 
 Prompts should be small and testable rather than monolithic. Every AI-generated change must be reviewed, adapted to project conventions, tested, and understood before integration.
 
@@ -521,17 +443,12 @@ Prompts should be small and testable rather than monolithic. Every AI-generated 
 
 ## Testing and Quality
 
-The project should include:
+- Unit tests for services, validation, and agent policies (allowed actions vs. refusals).
+- Integration tests for authentication, CRUD routes, and authorization.
+- A small set of agent tests covering: a normal Q&A turn, a refused out-of-scope request, and a confirmation-required write action.
+- A Postman collection covering the main API routes, kept alongside the OpenAPI spec.
 
-- Unit tests for services, utilities, validation, and agent policies.
-- Integration tests for authentication, CRUD routes, Sequelize database operations, and authorization.
-- Agent tests for allowed actions, refusals, prompt-injection attempts, and confirmation flows.
-- RAG tests for document ingestion, retrieval relevance, and unauthorized-content isolation.
-- Mobile tests for navigation guards, token refresh, chat streaming, and error states.
-- API collection tests using Postman or an equivalent tool.
-- Linting, formatting, and type checking in the development workflow.
-
-Quality checks should run automatically in CI before deployment.
+Keep the test suite focused on these core paths rather than exhaustive coverage — the goal for this project is a defensible, working demonstration, not production-grade test coverage.
 
 ---
 
@@ -540,30 +457,24 @@ Quality checks should run automatically in CI before deployment.
 The application is designed to be deployed with Docker on Railway or Render.
 
 Deployment requirements:
-
-- Use optimized multi-stage Dockerfiles where appropriate.
+- Use a multi-stage Dockerfile for the backend.
 - Provide production environment variables through the hosting platform's secret manager.
 - Run Sequelize migrations as an explicit deployment step.
-- Configure CORS, HTTPS, health checks, and database backups.
+- Configure CORS and HTTPS.
 - Restrict production logging to safe, useful information.
-- Never expose OpenAI keys or JWT secrets to the mobile application.
-- Document rollback and migration procedures.
+- Never expose the OpenAI key or JWT secrets to the mobile application.
 
 ---
 
 ## Documentation
 
 The repository should contain:
-
-- Global architecture and UML diagrams.
-- Use-case and class diagrams including AI entities.
-- Sequelize database schema, associations, and migration documentation.
+- Global architecture and UML diagrams (use case, class, sequence).
+- Sequelize database schema and association documentation.
 - OpenAPI/Swagger documentation.
 - Postman collection for the REST API.
-- Agent system prompt and tool specifications.
+- Agent system prompt and function-calling specification.
 - RAG ingestion and retrieval explanation.
-- MCP client/server documentation and demo scenario.
-- Automation workflow documentation, if implemented.
 - Vibe coding prompt journal.
 - Deployment and environment configuration instructions.
 
@@ -581,10 +492,9 @@ The repository should contain:
 - [ ] Implement document chunking, embeddings, and pgvector retrieval.
 - [ ] Add streamed conversations and persistent history.
 - [ ] Add agent safeguards, audit logs, and confirmation flows.
-- [ ] Integrate an MCP server or business tool.
-- [ ] Add automated tests and CI checks.
+- [ ] Add core tests (auth, CRUD, agent refusals/confirmations).
 - [ ] Containerize and deploy the application.
-- [ ] Complete the architecture, API, AI, deployment, and prompt-journal documentation.
+- [ ] Complete architecture, API, AI, deployment, and prompt-journal documentation.
 
 ---
 

@@ -1,12 +1,36 @@
+<div align="center">
+
 # 📚 DevBuddy AI
 
 ## AI-Powered Developer Learning Assistant
+
+![React Native](https://img.shields.io/badge/Frontend-React_Native_%2B_Expo-61DAFB?style=flat-square&logo=react)
+![Node](https://img.shields.io/badge/Backend-Node.js_%2B_Express-339933?style=flat-square&logo=node.js)
+![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL_%2B_pgvector-336791?style=flat-square&logo=postgresql)
+![OpenAI](https://img.shields.io/badge/AI-GPT--4o--mini-412991?style=flat-square&logo=openai)
+![Docker](https://img.shields.io/badge/Deploy-Docker_%2B_Railway%2FRender-2496ED?style=flat-square&logo=docker)
+![Status](https://img.shields.io/badge/Status-Draft_for_Review-yellow?style=flat-square)
+
+</div>
 
 DevBuddy AI is a mobile application that helps developers learn, organize, and review programming knowledge more efficiently. Users can create technical flashcards, organize them into learning decks, and interact with an AI-powered learning assistant.
 
 The assistant can explain programming concepts, answer questions using the user's personal knowledge base, generate quizzes, and transform notes into flashcards through Retrieval-Augmented Generation (RAG).
 
 > **Project type:** End-of-training project covering mobile development, backend development, database design, security, API integration, artificial intelligence, and deployment.
+
+<br>
+
+| | |
+|---|---|
+| 👤 **Prepared by** | Ayoub Khaya |
+| 💼 **Role** | Full-Stack Software Engineer (Project Author) |
+| 📄 **Document Type** | Final Project — Full-Stack Mobile Application |
+| 🧠 **Domain** | Artificial Intelligence · Mobile Development · Movies & TV Shows Tracker |
+| 🔖 **Version** | 1.0 |
+| 🚦 **Status** | Draft for Review |
+| 📅 **Date** | August 2026 |
+| 🌐 **Language** | English |
 
 ---
 

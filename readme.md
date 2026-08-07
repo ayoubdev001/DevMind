@@ -209,122 +209,92 @@ The repository is organized into separate mobile, backend, database, AI, integra
 
 ```text
 devbuddy-ai/
+
 ├── README.md
-├── LICENSE
-├── .gitignore
 ├── docker-compose.yml
+├── .env.example
+│
 ├── docs/
-│   ├── architecture/
-│   │   ├── system-architecture.md
-│   │   ├── use-case-diagram.md
-│   │   ├── class-diagram.md
-│   │   └── sequence-diagrams.md
-│   ├── database/
-│   │   ├── schema.md
-│   │   └── entity-relationship-diagram.md
-│   ├── ai/
-│   │   ├── agent-scope.md
-│   │   ├── system-prompt.md
-│   │   ├── rag-pipeline.md
-│   │   ├── tools.md
-│   │   └── mcp.md
-│   ├── api/
-│   │   ├── openapi.yaml
-│   │   └── postman-collection.json
-│   ├── deployment.md
+│   ├── architecture.md
+│   ├── database.md
+│   ├── ai.md
+│   ├── api.md
 │   └── vibe-coding-journal.md
+│
 ├── backend/
+
+│   ├── package.json
 │   ├── Dockerfile
-│   ├── package.json
-│   ├── src/
-│   │   ├── app.ts
-│   │   ├── server.ts
-│   │   ├── config/
-│   │   │   ├── env.ts
-│   │   │   └── database.ts
-│   │   ├── routes/
-│   │   ├── controllers/
-│   │   ├── services/
-│   │   ├── repositories/
-│   │   ├── middlewares/
-│   │   ├── validators/
-│   │   ├── models/
-│   │   │   ├── index.ts
-│   │   │   ├── user.model.ts
-│   │   │   ├── deck.model.ts
-│   │   │   ├── flashcard.model.ts
-│   │   │   ├── note.model.ts
-│   │   │   ├── conversation.model.ts
-│   │   │   ├── message.model.ts
-│   │   │   ├── embedding.model.ts
-│   │   │   ├── review.model.ts
-│   │   │   └── audit-log.model.ts
-│   │   ├── migrations/
-│   │   ├── seeders/
-│   │   ├── modules/
-│   │   │   ├── auth/
-│   │   │   ├── decks/
-│   │   │   ├── flashcards/
-│   │   │   ├── notes/
-│   │   │   ├── reviews/
-│   │   │   └── conversations/
-│   │   ├── ai/
-│   │   │   ├── agent.service.ts
-│   │   │   ├── rag.service.ts
-│   │   │   ├── embedding.service.ts
-│   │   │   ├── prompt.service.ts
-│   │   │   ├── tool.service.ts
-│   │   │   └── streaming.service.ts
-│   │   ├── integrations/
-│   │   │   ├── llm/
-│   │   │   ├── mcp/
-│   │   │   └── n8n/
-│   │   ├── utils/
-│   │   └── types/
-│   └── tests/
-│       ├── unit/
-│       └── integration/
+│
+│   ├── migrations/
+│   ├── seeders/
+│
+│   └── src/
+│       ├── app.js
+│       ├── server.js
+│
+│       ├── config/
+│       │   ├── database.js
+│       │   └── env.js
+│
+│       ├── models/
+│       │   ├── index.js
+│       │   ├── User.js
+│       │   ├── Deck.js
+│       │   ├── Flashcard.js
+│       │   ├── Conversation.js
+│       │   ├── Message.js
+│       │   └── Embedding.js
+│
+│       ├── routes/
+│       │   ├── auth.routes.js
+│       │   ├── deck.routes.js
+│       │   ├── flashcard.routes.js
+│       │   └── agent.routes.js
+│
+│       ├── controllers/
+│       │   ├── auth.controller.js
+│       │   ├── deck.controller.js
+│       │   ├── flashcard.controller.js
+│       │   └── agent.controller.js
+│
+│       ├── services/
+│       │   ├── auth.service.js
+│       │   ├── deck.service.js
+│       │   └── agent.service.js
+│
+│       ├── middleware/
+│       │   ├── auth.js
+│       │   └── error.js
+│
+│       ├── ai/
+│       │   ├── openai.service.js
+│       │   ├── rag.service.js
+│       │   ├── embedding.service.js
+│       │   ├── prompt.service.js
+│       │   └── streaming.service.js
+│
+│       └── utils/
+│           ├── jwt.js
+│           └── password.js
+│
 ├── mobile/
+
 │   ├── package.json
+│
 │   ├── app/
-│   │   ├── _layout.tsx
-│   │   ├── index.tsx
-│   │   ├── (auth)/
-│   │   │   ├── login.tsx
-│   │   │   └── register.tsx
-│   │   └── (protected)/
-│   │       ├── _layout.tsx
-│   │       ├── index.tsx
-│   │       ├── decks/
-│   │       ├── flashcards/
-│   │       ├── quizzes/
-│   │       ├── chat/
-│   │       └── settings.tsx
-│   ├── src/
-│   │   ├── components/
-│   │   ├── features/
-│   │   │   ├── auth/
-│   │   │   ├── decks/
-│   │   │   ├── flashcards/
-│   │   │   ├── quizzes/
-│   │   │   └── chat/
-│   │   ├── stores/
-│   │   │   ├── auth.store.ts
-│   │   │   ├── data.store.ts
-│   │   │   ├── ui.store.ts
-│   │   │   ├── cache.store.ts
-│   │   │   └── conversation.store.ts
-│   │   ├── services/
-│   │   │   ├── api.ts
-│   │   │   ├── auth.ts
-│   │   │   └── sse.ts
-│   │   ├── hooks/
-│   │   ├── types/
-│   │   ├── constants/
-│   │   └── utils/
-│   └── tests/
-│       ├── components/
-│       └── screens/
+│   │
+│   ├── (auth)/
+│   │   ├── login.jsx
+│   │   └── register.jsx
+│   │
+│   └── (protected)/
+│       ├── index.jsx
+│       ├── decks/
+│       ├── flashcards/
+│       └── chat/
+│
+│
 └── .github/
     └── workflows/
         └── ci.yml

@@ -393,6 +393,12 @@ The project itself demonstrates professional development practices:
 
 The REST API is documented with **OpenAPI/Swagger**, covering endpoints, request parameters/bodies, responses, authentication, and error responses.
 
+## classDiagram
+
+<img width="1082" height="2832" alt="Untitled Diagram-2026-09-25T09-28-32" src="https://github.com/user-attachments/assets/33b78956-1845-42fe-b906-a6f8b00cda44" />
+
+```
+
 ## Deployment
 
 - Containerized with **Docker**

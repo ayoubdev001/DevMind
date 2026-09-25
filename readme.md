@@ -2,7 +2,16 @@
   <div align="center">
 
 # DevMind
+[![CI Status](https://img.shields.io/badge/CI-GitHub%20Actions-22c55e?logo=github-actions)](.github/workflows/ci.yml)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+[![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL%2016-336791?logo=postgresql)](https://www.postgresql.org/)
+![Zod](https://img.shields.io/badge/zod-%233068b7.svg?style=for-the-badge&logo=zod&logoColor=white)
+[![Express](https://img.shields.io/badge/Backend-Express.js%20-black?logo=express)](https://expressjs.com/)
+![React Native](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+[![Expo](https://img.shields.io/badge/Expo-SDK%2057-000020?logo=expo)](https://expo.dev/)
+![React Router](https://img.shields.io/badge/React_Router-%23CA4245.svg?style=for-the-badge&logo=react-router&logoColor=white)
 
+---
 **AI-Powered Developer Learning Game**
 
 CodeMind is a mobile learning application that helps beginner and intermediate developers strengthen their technical knowledge through short, interactive multiple-choice challenges. It turns technical learning into a game — instead of following only traditional courses, users pick a technology or skill, solve challenges, get immediate AI feedback, unlock the next topic, and lean on an AI tutor when they're stuck.
